@@ -10,7 +10,7 @@ namespace ArtemkaKun.Scripts.EnemySystems
     {
         [SerializeField] private float spawnFrequencyInSeconds;
         [SerializeField] private float spawnRadius;
-        [SerializeField] private float minYCoordinate;
+        [SerializeField] private Vector2 yCoordinateBounds;
         [SerializeField] private GameObject enemyPrefab;
 
         private bool _isSpawnerActive;
@@ -31,24 +31,24 @@ namespace ArtemkaKun.Scripts.EnemySystems
             {
                 yield return new WaitForSeconds(spawnFrequencyInSeconds);
 
-                var randomPointOnSphere = Random.onUnitSphere * spawnRadius;
-
-                ClampYCoordinate(ref randomPointOnSphere);
-
                 var newEnemy = Instantiate(enemyPrefab);
-
-                newEnemy.transform.position = randomPointOnSphere;
+                
+                newEnemy.transform.position = ConvertPointTo3dSpace(GetRandomPointOnCircleEdge());
 
                 newEnemy.transform.LookAt(Vector3.zero);
             }
         }
 
-        private void ClampYCoordinate(ref Vector3 randomPointOnSphere)
+        private Vector2 GetRandomPointOnCircleEdge()
         {
-            if (randomPointOnSphere.y < minYCoordinate)
-            {
-                randomPointOnSphere.y = minYCoordinate;
-            }
+            var randomDirection = Random.insideUnitCircle.normalized;
+
+            return randomDirection * spawnRadius;
+        }
+
+        private Vector3 ConvertPointTo3dSpace(Vector2 randomPointOnSphere)
+        {
+            return new Vector3(randomPointOnSphere.x, Random.Range(yCoordinateBounds.x, yCoordinateBounds.y), randomPointOnSphere.y);
         }
 
         /// <summary>

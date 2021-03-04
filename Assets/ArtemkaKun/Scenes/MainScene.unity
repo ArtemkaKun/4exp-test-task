@@ -1196,8 +1196,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnFrequencyInSeconds: 5
-  spawnRadius: 35
-  minYCoordinate: 3
+  spawnRadius: 25
+  yCoordinateBounds: {x: 3, y: 9}
   enemyPrefab: {fileID: 600290284119941866, guid: 05debf15170205544a2792291950cd11,
     type: 3}
 --- !u!1001 &572520908
