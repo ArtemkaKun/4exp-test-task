@@ -12,9 +12,12 @@ namespace ArtemkaKun.Scripts.UI
         public static event Action OnEnemyKilled;
         
         public static event Action OnSecondPassed;
+
+        public static event Action OnPlayerHit;
         
         [SerializeField] private IntCounter killsCounter;
         [SerializeField] private Clock roundClock;
+        [SerializeField] private HpBar hpBar;
 
         private void Awake()
         {
@@ -26,6 +29,8 @@ namespace ArtemkaKun.Scripts.UI
             OnEnemyKilled += AddOneKill;
 
             OnSecondPassed += AddOneSecondToRoundClock;
+
+            OnPlayerHit += RegisterPlayerDamage;
         }
 
         private void AddOneKill()
@@ -38,13 +43,18 @@ namespace ArtemkaKun.Scripts.UI
             roundClock.IncrementCounter();
         }
 
+        private void RegisterPlayerDamage()
+        {
+            hpBar.DecreaseHp();
+        }
+
         //DEBUG ONLY
 #if UNITY_EDITOR
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                OnSecondPassed?.Invoke();
+                OnPlayerHit?.Invoke();
             }
         }
 #endif
