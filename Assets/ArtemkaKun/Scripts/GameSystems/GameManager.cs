@@ -8,7 +8,8 @@ using UnityEngine;
 namespace ArtemkaKun.Scripts.GameSystems
 {
     /// <summary>
-    /// Class, that manages game (rounds, communication between gameplay and UI, etc.). Should be one instance on this object on the scene.
+    ///     Class, that manages game (rounds, communication between gameplay and UI, etc.). Should be one instance on this
+    ///     object on the scene.
     /// </summary>
     public sealed class GameManager : MonoBehaviour
     {
@@ -16,11 +17,11 @@ namespace ArtemkaKun.Scripts.GameSystems
         [SerializeField] private ClockManager roundClockManager;
         [SerializeField] private Player playerManager;
         [SerializeField] private EnemySpawner enemySpawner;
+        private Action<int> _onEnemyKilledCountChanged;
+        private Action<int> _onPlayerHpChanged;
+        private Action _onPlayerLostAllHp;
 
         private Action<TimeSpan> _onTimeChanged;
-        private Action _onPlayerLostAllHp;
-        private Action<int> _onPlayerHpChanged;
-        private Action<int> _onEnemyKilledCountChanged;
 
         private void Awake()
         {
@@ -58,9 +59,9 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void StopRound()
         {
             enemySpawner.StopSpawner();
-            
+
             roundUi.SetRoundScore(CalculateRoundScore());
-            
+
             roundUi.ActivateFailedRoundCanvas();
         }
 
@@ -86,13 +87,13 @@ namespace ArtemkaKun.Scripts.GameSystems
         public void StartNewRound()
         {
             roundUi.ActivateInGameCanvas();
-            
+
             roundClockManager.ResetValue();
 
             roundClockManager.ActivateClock(true);
 
             playerManager.ResetData();
-            
+
             enemySpawner.StartSpawner();
         }
     }

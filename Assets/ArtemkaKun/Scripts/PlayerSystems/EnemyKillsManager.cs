@@ -3,17 +3,16 @@
 namespace ArtemkaKun.Scripts.PlayerSystems
 {
     /// <summary>
-    /// Class, that store and manages player's kills.
+    ///     Class, that store and manages player's kills.
     /// </summary>
     public sealed class EnemyKillsManager
     {
-        public int KillsCount => _killsCount;
-
         private Action<int> _onEnemyKilledCountChanged;
-        private int _killsCount;
+
+        public int KillsCount { get; private set; }
 
         /// <summary>
-        /// Initialize delegates.
+        ///     Initialize delegates.
         /// </summary>
         /// <param name="onEnemyKilledCountChangedDelegate">Delegate to invoke where 1 enemy was killed.</param>
         public void Initialize(Action<int> onEnemyKilledCountChangedDelegate)
@@ -22,23 +21,23 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         }
 
         /// <summary>
-        /// Reset value of killed enemies.
+        ///     Reset value of killed enemies.
         /// </summary>
         public void Reset()
         {
-            _killsCount = default;
-            
-            _onEnemyKilledCountChanged?.Invoke(_killsCount);
+            KillsCount = default;
+
+            _onEnemyKilledCountChanged?.Invoke(KillsCount);
         }
 
         /// <summary>
-        /// Increment killed enemies count by 1.
+        ///     Increment killed enemies count by 1.
         /// </summary>
         public void IncrementKilledEnemiesCount()
         {
-            _killsCount += 1;
-            
-            _onEnemyKilledCountChanged?.Invoke(_killsCount);
+            KillsCount += 1;
+
+            _onEnemyKilledCountChanged?.Invoke(KillsCount);
         }
     }
 }

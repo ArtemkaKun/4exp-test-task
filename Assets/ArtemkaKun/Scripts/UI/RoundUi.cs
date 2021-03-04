@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ArtemkaKun.Scripts.UI
 {
     /// <summary>
-    /// Class, that manages round UI in the game.
+    ///     Class, that manages round UI in the game.
     /// </summary>
     public sealed class RoundUi : MonoBehaviour
     {
@@ -18,7 +18,7 @@ namespace ArtemkaKun.Scripts.UI
         [SerializeField] private TMP_Text roundScoreText;
 
         /// <summary>
-        /// Initialize UI members. Should be used instead of Awake() method.
+        ///     Initialize UI members. Should be used instead of Awake() method.
         /// </summary>
         public void Initialize(Vector2Int hpBarBounds)
         {
@@ -26,7 +26,7 @@ namespace ArtemkaKun.Scripts.UI
         }
 
         /// <summary>
-        /// Change value of enemy kills.
+        ///     Change value of enemy kills.
         /// </summary>
         /// <param name="newKillsValue">New value of kills.</param>
         public void ChangeKilledEnemiesCount(int newKillsValue)
@@ -35,7 +35,7 @@ namespace ArtemkaKun.Scripts.UI
         }
 
         /// <summary>
-        /// Set new value for the round clock.
+        ///     Set new value for the round clock.
         /// </summary>
         /// <param name="newRoundTime">New rounds clock time.</param>
         public void ChangeRoundClockValue(TimeSpan newRoundTime)
@@ -44,7 +44,7 @@ namespace ArtemkaKun.Scripts.UI
         }
 
         /// <summary>
-        /// Changes value of the HP bar.
+        ///     Changes value of the HP bar.
         /// </summary>
         public void ChangePlayerHp(int newValue)
         {
@@ -52,27 +52,27 @@ namespace ArtemkaKun.Scripts.UI
         }
 
         /// <summary>
-        /// Activate in game canvas, deactivate failed round canvas.
+        ///     Activate in game canvas, deactivate failed round canvas.
         /// </summary>
         public void ActivateInGameCanvas()
         {
             inGameCanvas.SetActive(true);
-            
+
             roundFailedCanvas.SetActive(false);
         }
-        
+
         /// <summary>
-        /// Activate in failed round canvas, deactivate in game UI canvas.
+        ///     Activate in failed round canvas, deactivate in game UI canvas.
         /// </summary>
         public void ActivateFailedRoundCanvas()
         {
             inGameCanvas.SetActive(false);
-            
+
             roundFailedCanvas.SetActive(true);
         }
 
         /// <summary>
-        /// Set round score to field, that will be showed on the failed round screen.
+        ///     Set round score to field, that will be showed on the failed round screen.
         /// </summary>
         /// <param name="score">Round score.</param>
         public void SetRoundScore(int score)

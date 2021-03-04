@@ -4,21 +4,21 @@ using UnityEngine;
 namespace ArtemkaKun.Scripts.PlayerSystems
 {
     /// <summary>
-    /// Class, that stores and manages player's hp.
+    ///     Class, that stores and manages player's hp.
     /// </summary>
     [Serializable]
     public sealed class HpManager
     {
+        [SerializeField] private Vector2Int hpBounds;
+        
+        private int _currentHp;
+        private Action<int> _onPlayerHpChanged;
+        private Action _onPlayerLostAllHp;
+
         public Vector2Int HpBounds => hpBounds;
 
-        [SerializeField] private Vector2Int hpBounds;
-
-        private Action _onPlayerLostAllHp;
-        private Action<int> _onPlayerHpChanged;
-        private int _currentHp;
-
         /// <summary>
-        /// Initialize delegates and set default hp value.
+        ///     Initialize delegates and set default hp value.
         /// </summary>
         /// <param name="playerLostAllHpDelegate">Delegate to invoke when player lost all hp.</param>
         /// <param name="onPlayerHpChanged">Delegate to invoke when player's hp was changed.</param>
@@ -32,7 +32,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         }
 
         /// <summary>
-        /// Reset hp value (set on equal bounds max value).
+        ///     Reset hp value (set on equal bounds max value).
         /// </summary>
         public void Reset()
         {
@@ -47,7 +47,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         }
 
         /// <summary>
-        /// Decrement HP's count on 1.
+        ///     Decrement HP's count on 1.
         /// </summary>
         public void DecrementHp()
         {
