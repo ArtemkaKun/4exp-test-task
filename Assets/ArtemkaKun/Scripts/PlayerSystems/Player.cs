@@ -43,10 +43,14 @@ namespace ArtemkaKun.Scripts.PlayerSystems
             _enemyKillsManager.Reset();
         }
 
-        /// <summary>
-        /// Decrement HP's count on 1.
-        /// </summary>
-        public void DecrementHp()
+        private void OnTriggerEnter(Collider enemy)
+        {
+            DecrementHp();
+            
+            Destroy(enemy.gameObject);
+        }
+        
+        private void DecrementHp()
         {
             hpManager.DecrementHp();
         }
