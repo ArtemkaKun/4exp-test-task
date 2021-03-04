@@ -25,7 +25,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
             _onPlayerLostAllHp = playerLostAllHpDelegate;
 
             _onPlayerHit = onPlayerHitDelegate;
-            
+
             SetHpEqualMaxBoundsValue();
         }
 
@@ -40,7 +40,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         private void SetHpEqualMaxBoundsValue()
         {
             _currentHp = hpBounds.y;
-            
+
             _onPlayerHit?.Invoke(_currentHp);
         }
 
@@ -52,7 +52,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
             _currentHp -= 1;
 
             _onPlayerHit?.Invoke(_currentHp);
-            
+
             if (_currentHp == hpBounds.x)
             {
                 _onPlayerLostAllHp?.Invoke();

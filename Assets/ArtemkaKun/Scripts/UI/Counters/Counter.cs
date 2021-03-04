@@ -10,32 +10,16 @@ namespace ArtemkaKun.Scripts.UI.Counters
     public class Counter<T> : MonoBehaviour
         where T : IFormattable
     {
-        protected T counterValue;
-        
         [SerializeField] private TMP_Text counterText;
         [SerializeField] private string counterTextFormat;
 
         /// <summary>
-        /// Resets counter to it's default value.
+        /// Set new value of counter.
         /// </summary>
-        public virtual void ResetCounter()
+        /// <param name="newCounterValue">New value of counter.</param>
+        public void SetCounterValueToText(T newCounterValue)
         {
-            counterValue = default;
-
-            SetCounterValueToText();
-        }
-
-        /// <summary>
-        /// Increments value of counter of the one unit. Attention - inheritors need to implement counter value increment!
-        /// </summary>
-        public virtual void IncrementCounter()
-        {
-            SetCounterValueToText();
-        }
-
-        private void SetCounterValueToText()
-        {
-            counterText.text = counterValue.ToString(counterTextFormat, null);
+            counterText.text = newCounterValue.ToString(counterTextFormat, null);
         }
     }
 }

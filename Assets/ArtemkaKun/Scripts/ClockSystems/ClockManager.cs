@@ -8,16 +8,17 @@ namespace ArtemkaKun.Scripts.ClockSystems
     /// </summary>
     public sealed class ClockManager : MonoBehaviour
     {
-        private Action<float> _onTimePassed;
+        private Action<TimeSpan> _onTimeChanged;
         private bool _isClockActive;
+        private TimeSpan _clockValue;
 
         /// <summary>
         /// Initialize delegate connected to the clock UI.
         /// </summary>
         /// <param name="onTimePassesDelegate"></param>
-        public void Initialize(Action<float> onTimePassesDelegate)
+        public void Initialize(Action<TimeSpan> onTimePassesDelegate)
         {
-            _onTimePassed = onTimePassesDelegate;
+            _onTimeChanged = onTimePassesDelegate;
         }
 
         /// <summary>
@@ -29,14 +30,28 @@ namespace ArtemkaKun.Scripts.ClockSystems
             _isClockActive = newStatus;
         }
 
+        /// <summary>
+        /// Reset clock's value.
+        /// </summary>
+        public void ResetValue()
+        {
+            ActivateClock(false);
+
+            _clockValue = default;
+
+            _onTimeChanged?.Invoke(_clockValue);
+        }
+
         private void Update()
         {
             if (!_isClockActive)
             {
                 return;
             }
-            
-            _onTimePassed?.Invoke(Time.deltaTime);
+
+            _clockValue = _clockValue.Add(TimeSpan.FromSeconds(Time.deltaTime));
+
+            _onTimeChanged?.Invoke(_clockValue);
         }
     }
 }

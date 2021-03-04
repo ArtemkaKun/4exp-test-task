@@ -27,7 +27,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         {
             hpManager.Reset();
         }
-        
+
         /// <summary>
         /// Decrement HP's count on 1.
         /// </summary>

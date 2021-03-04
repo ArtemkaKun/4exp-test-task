@@ -1,4 +1,5 @@
-﻿using ArtemkaKun.Scripts.UI.Counters;
+﻿using System;
+using ArtemkaKun.Scripts.UI.Counters;
 using UnityEngine;
 
 namespace ArtemkaKun.Scripts.UI
@@ -11,7 +12,7 @@ namespace ArtemkaKun.Scripts.UI
         [SerializeField] private IntCounter killsCounter;
         [SerializeField] private ClockUi roundClockUi;
         [SerializeField] private HpBar hpBar;
-        
+
         /// <summary>
         /// Initialize UI subscriptions and members. Should be used instead of Awake() method.
         /// </summary>
@@ -20,18 +21,13 @@ namespace ArtemkaKun.Scripts.UI
             hpBar.Initialize(hpBarBounds);
         }
 
-        private void AddOneKill()
-        {
-            killsCounter.IncrementCounter();
-        }
-
         /// <summary>
-        /// Adds passed time to the round clock.
+        /// Set new value for the round clock.
         /// </summary>
-        /// <param name="passedTime">How many seconds were passed.</param>
-        public void AddTimeToRoundClock(float passedTime)
+        /// <param name="newRoundTime">New rounds clock time.</param>
+        public void ChangeRoundClockValue(TimeSpan newRoundTime)
         {
-            roundClockUi.AddTimeToClock(passedTime);
+            roundClockUi.SetCounterValueToText(newRoundTime);
         }
 
         /// <summary>

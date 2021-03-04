@@ -15,36 +15,36 @@ namespace ArtemkaKun.Scripts.GameSystems
         [SerializeField] private ClockManager roundClockManager;
         [SerializeField] private Player playerManager;
 
-        private Action<float> _onTimePassed;
+        private Action<TimeSpan> _onTimeChanged;
         private Action _onPlayerLostAllHp;
         private Action<int> _onPlayerHit;
 
         private void Awake()
         {
             InitializeGameManagerDelegates();
-            
+
             InitializeSystems();
         }
 
         private void InitializeGameManagerDelegates()
         {
-            _onTimePassed = ReactOnTimePassedEvent;
-            
+            _onTimeChanged = ReactOnTimePassedEvent;
+
             _onPlayerHit = ReactOnPlayerHit;
-            
+
             _onPlayerLostAllHp += StopRound;
         }
 
-        private void ReactOnTimePassedEvent(float timePassedValue)
+        private void ReactOnTimePassedEvent(TimeSpan newTimeValue)
         {
-            roundUi.AddTimeToRoundClock(timePassedValue);
+            roundUi.ChangeRoundClockValue(newTimeValue);
         }
 
         private void ReactOnPlayerHit(int newValue)
         {
             roundUi.ChangePlayerHp(newValue);
         }
-        
+
         private void StopRound()
         {
             StartNewRound();
@@ -54,9 +54,9 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void InitializeSystems()
         {
             roundUi.Initialize(playerManager.HpBounds);
-            
-            roundClockManager.Initialize(_onTimePassed);
-            
+
+            roundClockManager.Initialize(_onTimeChanged);
+
             playerManager.Initialize(_onPlayerLostAllHp, _onPlayerHit);
         }
 
@@ -67,8 +67,10 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private void StartNewRound()
         {
+            roundClockManager.ResetValue();
+
             roundClockManager.ActivateClock(true);
-            
+
             playerManager.ResetData();
         }
 

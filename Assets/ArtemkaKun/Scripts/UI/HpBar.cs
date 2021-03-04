@@ -18,7 +18,7 @@ namespace ArtemkaKun.Scripts.UI
             bar.minValue = newBarBounds.x;
             bar.maxValue = newBarBounds.y;
         }
-        
+
         /// <summary>
         /// Set new hp value
         /// </summary>
