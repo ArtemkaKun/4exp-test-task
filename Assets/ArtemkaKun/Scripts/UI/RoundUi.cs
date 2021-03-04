@@ -77,7 +77,7 @@ namespace ArtemkaKun.Scripts.UI
         /// <param name="score">Round score.</param>
         public void SetRoundScore(int score)
         {
-            roundScoreText.text = score.ToString();
+            roundScoreText.text = $"Your score is - {score.ToString()} points";
         }
     }
 }
