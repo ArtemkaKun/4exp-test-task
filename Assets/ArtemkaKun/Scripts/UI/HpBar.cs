@@ -17,5 +17,13 @@ namespace ArtemkaKun.Scripts.UI
         {
             bar.value -= 1;
         }
+
+        /// <summary>
+        /// Set hp bar to its default value (max value = full hp)
+        /// </summary>
+        public void ResetValue()
+        {
+            bar.value = bar.maxValue;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace ArtemkaKun.Scripts.UI.Counters
         /// <summary>
         /// Resets counter to it's default value.
         /// </summary>
-        public void ResetCounter()
+        public virtual void ResetCounter()
         {
             counterValue = default;
 

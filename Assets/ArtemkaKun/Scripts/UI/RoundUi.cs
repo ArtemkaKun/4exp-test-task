@@ -11,15 +11,18 @@ namespace ArtemkaKun.Scripts.UI
     {
         public static event Action OnEnemyKilled;
         
-        public static event Action OnSecondPassed;
+        public Action<float> OnTimePassed { get; private set; }
 
         public static event Action OnPlayerHit;
         
         [SerializeField] private IntCounter killsCounter;
-        [SerializeField] private Clock roundClock;
+        [SerializeField] private ClockUi roundClockUi;
         [SerializeField] private HpBar hpBar;
-
-        private void Awake()
+        
+        /// <summary>
+        /// Initialize UI subscriptions and members. Should be used instead of Awake() method.
+        /// </summary>
+        public void Initialize()
         {
             SubscribeOnUiEvents();
         }
@@ -28,7 +31,7 @@ namespace ArtemkaKun.Scripts.UI
         {
             OnEnemyKilled += AddOneKill;
 
-            OnSecondPassed += AddOneSecondToRoundClock;
+            OnTimePassed += AddTimeToRoundClock;
 
             OnPlayerHit += RegisterPlayerDamage;
         }
@@ -38,9 +41,9 @@ namespace ArtemkaKun.Scripts.UI
             killsCounter.IncrementCounter();
         }
 
-        private void AddOneSecondToRoundClock()
+        private void AddTimeToRoundClock(float passedTime)
         {
-            roundClock.IncrementCounter();
+            roundClockUi.AddTimeToClock(passedTime);
         }
 
         private void RegisterPlayerDamage()
@@ -48,15 +51,13 @@ namespace ArtemkaKun.Scripts.UI
             hpBar.DecreaseHp();
         }
 
-        //DEBUG ONLY
-#if UNITY_EDITOR
-        private void Update()
+        public void ResetAllUi()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                OnPlayerHit?.Invoke();
-            }
+            killsCounter.ResetCounter();
+            
+            roundClockUi.ResetCounter();
+            
+            hpBar.ResetValue();
         }
-#endif
     }
 }
