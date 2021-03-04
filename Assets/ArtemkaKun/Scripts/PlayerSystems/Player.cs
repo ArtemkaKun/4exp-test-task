@@ -12,12 +12,16 @@ namespace ArtemkaKun.Scripts.PlayerSystems
 
         [SerializeField] private HpManager hpManager;
 
+        private readonly EnemyKillsManager _enemyKillsManager = new EnemyKillsManager();
+
         /// <summary>
         /// Initialize player's data and UI connections.
         /// </summary>
-        public void Initialize(Action playerLostAllHpDelegate, Action<int> onPlayerHitDelegate)
+        public void Initialize(Action playerLostAllHpDelegate, Action<int> onPlayerHpChanged, Action<int> onEnemyKilledCountChanged)
         {
-            hpManager.Initialize(playerLostAllHpDelegate, onPlayerHitDelegate);
+            hpManager.Initialize(playerLostAllHpDelegate, onPlayerHpChanged);
+            
+            _enemyKillsManager.Initialize(onEnemyKilledCountChanged);
         }
 
         /// <summary>
@@ -26,6 +30,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         public void ResetData()
         {
             hpManager.Reset();
+            
+            _enemyKillsManager.Reset();
         }
 
         /// <summary>
@@ -34,6 +40,14 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         public void DecrementHp()
         {
             hpManager.DecrementHp();
+        }
+
+        /// <summary>
+        /// Increments of killed enemies count by 1.
+        /// </summary>
+        public void IncrementEnemyKillsCount()
+        {
+            _enemyKillsManager.IncrementKilledEnemiesCount();
         }
     }
 }

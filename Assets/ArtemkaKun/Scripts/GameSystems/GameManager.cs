@@ -17,7 +17,8 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private Action<TimeSpan> _onTimeChanged;
         private Action _onPlayerLostAllHp;
-        private Action<int> _onPlayerHit;
+        private Action<int> _onPlayerHpChanged;
+        private Action<int> _onEnemyKilledCountChanged;
 
         private void Awake()
         {
@@ -28,14 +29,16 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private void InitializeGameManagerDelegates()
         {
-            _onTimeChanged = ReactOnTimePassedEvent;
+            _onTimeChanged += ReactOnTimeChangedEvent;
 
-            _onPlayerHit = ReactOnPlayerHit;
+            _onPlayerHpChanged += ReactOnPlayerHit;
+
+            _onEnemyKilledCountChanged += ReactOnEnemyKilledCountChangedEvent;
 
             _onPlayerLostAllHp += StopRound;
         }
 
-        private void ReactOnTimePassedEvent(TimeSpan newTimeValue)
+        private void ReactOnTimeChangedEvent(TimeSpan newTimeValue)
         {
             roundUi.ChangeRoundClockValue(newTimeValue);
         }
@@ -43,6 +46,11 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void ReactOnPlayerHit(int newValue)
         {
             roundUi.ChangePlayerHp(newValue);
+        }
+
+        private void ReactOnEnemyKilledCountChangedEvent(int newKillsValue)
+        {
+            roundUi.ChangeKilledEnemiesCount(newKillsValue);
         }
 
         private void StopRound()
@@ -57,7 +65,7 @@ namespace ArtemkaKun.Scripts.GameSystems
 
             roundClockManager.Initialize(_onTimeChanged);
 
-            playerManager.Initialize(_onPlayerLostAllHp, _onPlayerHit);
+            playerManager.Initialize(_onPlayerLostAllHp, _onPlayerHpChanged, _onEnemyKilledCountChanged);
         }
 
         private void Start()
@@ -86,6 +94,11 @@ namespace ArtemkaKun.Scripts.GameSystems
             if (Input.GetKeyDown(KeyCode.H))
             {
                 playerManager.DecrementHp();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                playerManager.IncrementEnemyKillsCount();
             }
         }
 #endif

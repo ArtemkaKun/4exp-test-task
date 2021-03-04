@@ -22,6 +22,15 @@ namespace ArtemkaKun.Scripts.UI
         }
 
         /// <summary>
+        /// Change value of enemy kills.
+        /// </summary>
+        /// <param name="newKillsValue">New value of kills.</param>
+        public void ChangeKilledEnemiesCount(int newKillsValue)
+        {
+            killsCounter.SetCounterValueToText(newKillsValue);
+        }
+
+        /// <summary>
         /// Set new value for the round clock.
         /// </summary>
         /// <param name="newRoundTime">New rounds clock time.</param>
