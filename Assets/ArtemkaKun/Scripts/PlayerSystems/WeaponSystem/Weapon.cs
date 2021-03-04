@@ -11,8 +11,14 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
     {
         [SerializeField] private WeaponData data;
         [SerializeField] private Camera playerCamera;
-
+        [SerializeField] private AudioSource weaponAudioSource;
+        
         public event Action OnEnemyWasKilled;
+
+        private void Awake()
+        {
+            weaponAudioSource.clip = data.FireSound;
+        }
 
         private void Update()
         {
@@ -20,6 +26,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
             {
                 return;
             }
+
+            weaponAudioSource.Play();
 
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out var hit, data.Range))
             {

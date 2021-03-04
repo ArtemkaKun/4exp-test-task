@@ -9,7 +9,10 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
     public sealed class WeaponData : ScriptableObject
     {
         [SerializeField] private float range;
+        [SerializeField] private AudioClip fireSound;
 
         public float Range => range;
+
+        public AudioClip FireSound => fireSound;
     }
 }
