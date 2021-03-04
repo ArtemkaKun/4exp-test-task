@@ -9,9 +9,12 @@ namespace ArtemkaKun.Scripts.UI
     /// </summary>
     public sealed class RoundUi : MonoBehaviour
     {
-        public static event Action OnEnemyKilled; 
+        public static event Action OnEnemyKilled;
+        
+        public static event Action OnSecondPassed;
         
         [SerializeField] private IntCounter killsCounter;
+        [SerializeField] private Clock roundClock;
 
         private void Awake()
         {
@@ -21,11 +24,18 @@ namespace ArtemkaKun.Scripts.UI
         private void SubscribeOnUiEvents()
         {
             OnEnemyKilled += AddOneKill;
+
+            OnSecondPassed += AddOneSecondToRoundClock;
         }
 
         private void AddOneKill()
         {
             killsCounter.IncrementCounter();
+        }
+
+        private void AddOneSecondToRoundClock()
+        {
+            roundClock.IncrementCounter();
         }
 
         //DEBUG ONLY
@@ -34,7 +44,7 @@ namespace ArtemkaKun.Scripts.UI
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                OnEnemyKilled?.Invoke();
+                OnSecondPassed?.Invoke();
             }
         }
 #endif

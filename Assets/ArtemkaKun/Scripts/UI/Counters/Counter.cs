@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace ArtemkaKun.Scripts.UI.Counters
@@ -7,10 +8,12 @@ namespace ArtemkaKun.Scripts.UI.Counters
     /// Base class for every UI counter that contains methods and data to maintain counter in easy way.
     /// </summary>
     public class Counter<T> : MonoBehaviour
+        where T : IFormattable
     {
-        [SerializeField] private TMP_Text counterText;
-
         protected T counterValue;
+        
+        [SerializeField] private TMP_Text counterText;
+        [SerializeField] private string counterTextFormat;
 
         /// <summary>
         /// Resets counter to it's default value.
@@ -32,7 +35,7 @@ namespace ArtemkaKun.Scripts.UI.Counters
 
         private void SetCounterValueToText()
         {
-            counterText.text = counterValue.ToString();
+            counterText.text = counterValue.ToString(counterTextFormat, null);
         }
     }
 }
