@@ -1,4 +1,5 @@
 ﻿using System;
+using ArtemkaKun.Scripts.PlayerSystems.WeaponSystem;
 using UnityEngine;
 
 namespace ArtemkaKun.Scripts.PlayerSystems
@@ -11,6 +12,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         public Vector2Int HpBounds => hpManager.HpBounds;
 
         [SerializeField] private HpManager hpManager;
+        [SerializeField] private Weapon weapon;
 
         private readonly EnemyKillsManager _enemyKillsManager = new EnemyKillsManager();
 
@@ -22,6 +24,13 @@ namespace ArtemkaKun.Scripts.PlayerSystems
             hpManager.Initialize(playerLostAllHpDelegate, onPlayerHpChanged);
             
             _enemyKillsManager.Initialize(onEnemyKilledCountChanged);
+
+            weapon.OnEnemyWasKilled += IncrementEnemyKillsCount;
+        }
+
+        private void IncrementEnemyKillsCount()
+        {
+            _enemyKillsManager.IncrementKilledEnemiesCount();
         }
 
         /// <summary>
@@ -40,14 +49,6 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         public void DecrementHp()
         {
             hpManager.DecrementHp();
-        }
-
-        /// <summary>
-        /// Increments of killed enemies count by 1.
-        /// </summary>
-        public void IncrementEnemyKillsCount()
-        {
-            _enemyKillsManager.IncrementKilledEnemiesCount();
         }
     }
 }

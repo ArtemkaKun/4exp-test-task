@@ -8,6 +8,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
     /// </summary>
     public sealed class Weapon : MonoBehaviour
     {
+        public event Action OnEnemyWasKilled;
+        
         [SerializeField] private WeaponData data;
         [SerializeField] private Camera playerCamera;
 
@@ -20,8 +22,15 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
 
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out var hit, data.Range))
             {
-                Destroy(hit.collider.gameObject); 
+                KillEnemy(hit.collider.gameObject); 
             }
+        }
+
+        private void KillEnemy(GameObject enemy)
+        {
+            Destroy(enemy);
+            
+            OnEnemyWasKilled?.Invoke();
         }
     }
 }

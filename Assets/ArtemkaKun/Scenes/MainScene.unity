@@ -883,6 +883,7 @@ GameObject:
   m_Component:
   - component: {fileID: 830084741}
   - component: {fileID: 830084742}
+  - component: {fileID: 830084743}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -919,6 +920,18 @@ MonoBehaviour:
   roundUi: {fileID: 1307563138}
   roundClockManager: {fileID: 1689027685}
   playerManager: {fileID: 1666629500}
+--- !u!114 &830084743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830084740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd68f027e715c44aa8d097000d4cccfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &932534736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpManager:
     hpBounds: {x: 0, y: 3}
+  weapon: {fileID: 205168638}
 --- !u!1 &1689027683
 GameObject:
   m_ObjectHideFlags: 0

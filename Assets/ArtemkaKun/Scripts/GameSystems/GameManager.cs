@@ -81,26 +81,5 @@ namespace ArtemkaKun.Scripts.GameSystems
 
             playerManager.ResetData();
         }
-
-        //DEBUG ONLY
-#if UNITY_EDITOR
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                StartNewRound();
-            }
-
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                playerManager.DecrementHp();
-            }
-            
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                playerManager.IncrementEnemyKillsCount();
-            }
-        }
-#endif
     }
 }
