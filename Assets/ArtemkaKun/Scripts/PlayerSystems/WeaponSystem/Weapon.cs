@@ -1,4 +1,5 @@
 ﻿using System;
+using ArtemkaKun.Scripts.EnemySystems;
 using Google.XR.Cardboard;
 using UnityEngine;
 
@@ -37,6 +38,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
 
         private void KillEnemy(GameObject enemy)
         {
+            enemy.GetComponent<Enemy>().PlayDieSound();
+            
             Destroy(enemy);
 
             OnEnemyWasKilled?.Invoke();

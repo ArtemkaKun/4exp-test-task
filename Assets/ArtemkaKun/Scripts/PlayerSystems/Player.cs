@@ -1,4 +1,5 @@
 ﻿using System;
+using ArtemkaKun.Scripts.EnemySystems;
 using ArtemkaKun.Scripts.PlayerSystems.WeaponSystem;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems
 
         private void OnTriggerEnter(Collider enemy)
         {
+            enemy.gameObject.GetComponent<Enemy>().PlayAttackSound();
+            
             DecrementHp();
 
             Destroy(enemy.gameObject);

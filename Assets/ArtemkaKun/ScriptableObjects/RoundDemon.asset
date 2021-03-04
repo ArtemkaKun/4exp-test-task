@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: RoundDemon
   m_EditorClassIdentifier: 
   speed: 2.5
+  enemyDiesSound: {fileID: 8300000, guid: d0d3c899ab95a6e4fae714d193b5949c, type: 3}
+  enemyAttackSound: {fileID: 8300000, guid: 4392ae546d0ed0b4491b737d912e20b2, type: 3}
