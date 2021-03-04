@@ -17,6 +17,7 @@ namespace ArtemkaKun.Scripts.GameSystems
         [SerializeField] private ClockManager roundClockManager;
         [SerializeField] private Player playerManager;
         [SerializeField] private EnemySpawner enemySpawner;
+        
         private Action<int> _onEnemyKilledCountChanged;
         private Action<int> _onPlayerHpChanged;
         private Action _onPlayerLostAllHp;
@@ -59,6 +60,8 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void StopRound()
         {
             enemySpawner.StopSpawner();
+            
+            StopAllCoroutines();
 
             roundUi.SetRoundScore(CalculateRoundScore());
 

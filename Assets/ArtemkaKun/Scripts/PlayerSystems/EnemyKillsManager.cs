@@ -9,7 +9,9 @@ namespace ArtemkaKun.Scripts.PlayerSystems
     {
         private Action<int> _onEnemyKilledCountChanged;
 
-        public int KillsCount { get; private set; }
+        private int _killsCount;
+
+        public int KillsCount => _killsCount;
 
         /// <summary>
         ///     Initialize delegates.
@@ -25,9 +27,9 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         /// </summary>
         public void Reset()
         {
-            KillsCount = default;
+            _killsCount = default;
 
-            _onEnemyKilledCountChanged?.Invoke(KillsCount);
+            _onEnemyKilledCountChanged?.Invoke(_killsCount);
         }
 
         /// <summary>
@@ -35,9 +37,9 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         /// </summary>
         public void IncrementKilledEnemiesCount()
         {
-            KillsCount += 1;
+            _killsCount += 1;
 
-            _onEnemyKilledCountChanged?.Invoke(KillsCount);
+            _onEnemyKilledCountChanged?.Invoke(_killsCount);
         }
     }
 }
