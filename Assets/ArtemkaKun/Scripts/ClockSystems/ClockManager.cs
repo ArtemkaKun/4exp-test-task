@@ -8,6 +8,8 @@ namespace ArtemkaKun.Scripts.ClockSystems
     /// </summary>
     public sealed class ClockManager : MonoBehaviour
     {
+        public TimeSpan ClockValue => _clockValue;
+
         private Action<TimeSpan> _onTimeChanged;
         private bool _isClockActive;
         private TimeSpan _clockValue;

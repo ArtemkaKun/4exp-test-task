@@ -10,6 +10,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems
     public sealed class Player : MonoBehaviour
     {
         public Vector2Int HpBounds => hpManager.HpBounds;
+        
+        public int KillsCount => _enemyKillsManager.KillsCount;
 
         [SerializeField] private HpManager hpManager;
         [SerializeField] private Weapon weapon;

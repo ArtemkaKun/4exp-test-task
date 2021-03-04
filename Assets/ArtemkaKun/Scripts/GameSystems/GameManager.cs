@@ -58,6 +58,15 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void StopRound()
         {
             enemySpawner.StopSpawner();
+            
+            roundUi.SetRoundScore(CalculateRoundScore());
+            
+            roundUi.ActivateFailedRoundCanvas();
+        }
+
+        private int CalculateRoundScore()
+        {
+            return playerManager.KillsCount * roundClockManager.ClockValue.Seconds;
         }
 
         private void InitializeSystems()
@@ -74,8 +83,10 @@ namespace ArtemkaKun.Scripts.GameSystems
             StartNewRound();
         }
 
-        private void StartNewRound()
+        public void StartNewRound()
         {
+            roundUi.ActivateInGameCanvas();
+            
             roundClockManager.ResetValue();
 
             roundClockManager.ActivateClock(true);

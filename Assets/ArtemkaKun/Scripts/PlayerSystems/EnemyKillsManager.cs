@@ -7,6 +7,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems
     /// </summary>
     public sealed class EnemyKillsManager
     {
+        public int KillsCount => _killsCount;
+
         private Action<int> _onEnemyKilledCountChanged;
         private int _killsCount;
 
