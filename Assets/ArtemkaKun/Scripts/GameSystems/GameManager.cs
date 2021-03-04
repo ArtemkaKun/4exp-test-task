@@ -1,5 +1,6 @@
 ﻿using System;
 using ArtemkaKun.Scripts.ClockSystems;
+using ArtemkaKun.Scripts.EnemySystems;
 using ArtemkaKun.Scripts.PlayerSystems;
 using ArtemkaKun.Scripts.UI;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace ArtemkaKun.Scripts.GameSystems
         [SerializeField] private RoundUi roundUi;
         [SerializeField] private ClockManager roundClockManager;
         [SerializeField] private Player playerManager;
+        [SerializeField] private EnemySpawner enemySpawner;
 
         private Action<TimeSpan> _onTimeChanged;
         private Action _onPlayerLostAllHp;
@@ -55,8 +57,7 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private void StopRound()
         {
-            StartNewRound();
-            Debug.Log("Round is over");
+            enemySpawner.StopSpawner();
         }
 
         private void InitializeSystems()
@@ -80,6 +81,8 @@ namespace ArtemkaKun.Scripts.GameSystems
             roundClockManager.ActivateClock(true);
 
             playerManager.ResetData();
+            
+            enemySpawner.StartSpawner();
         }
     }
 }
