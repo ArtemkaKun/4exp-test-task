@@ -20,19 +20,11 @@ namespace ArtemkaKun.Scripts.UI
         }
         
         /// <summary>
-        /// Decreases on 1;
+        /// Set new hp value
         /// </summary>
-        public void DecreaseHp()
+        public void SetHpValue(int newValue)
         {
-            bar.value -= 1;
-        }
-
-        /// <summary>
-        /// Set hp bar to its default value (max value = full hp)
-        /// </summary>
-        public void ResetValue()
-        {
-            bar.value = bar.maxValue;
+            bar.value = newValue;
         }
     }
 }

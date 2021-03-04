@@ -15,7 +15,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         /// <summary>
         /// Initialize player's data and UI connections.
         /// </summary>
-        public void Initialize(Action playerLostAllHpDelegate, Action onPlayerHitDelegate)
+        public void Initialize(Action playerLostAllHpDelegate, Action<int> onPlayerHitDelegate)
         {
             hpManager.Initialize(playerLostAllHpDelegate, onPlayerHitDelegate);
         }

@@ -37,18 +37,9 @@ namespace ArtemkaKun.Scripts.UI
         /// <summary>
         /// Changes value of the HP bar.
         /// </summary>
-        public void RegisterPlayerDamage()
+        public void ChangePlayerHp(int newValue)
         {
-            hpBar.DecreaseHp();
-        }
-
-        public void ResetAllUi()
-        {
-            killsCounter.ResetCounter();
-            
-            roundClockUi.ResetCounter();
-            
-            hpBar.ResetValue();
+            hpBar.SetHpValue(newValue);
         }
     }
 }

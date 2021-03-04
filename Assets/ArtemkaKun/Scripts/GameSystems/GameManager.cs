@@ -17,7 +17,7 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private Action<float> _onTimePassed;
         private Action _onPlayerLostAllHp;
-        private Action _onPlayerHit;
+        private Action<int> _onPlayerHit;
 
         private void Awake()
         {
@@ -40,9 +40,9 @@ namespace ArtemkaKun.Scripts.GameSystems
             roundUi.AddTimeToRoundClock(timePassedValue);
         }
 
-        private void ReactOnPlayerHit()
+        private void ReactOnPlayerHit(int newValue)
         {
-            roundUi.RegisterPlayerDamage();
+            roundUi.ChangePlayerHp(newValue);
         }
         
         private void StopRound()
@@ -67,8 +67,6 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private void StartNewRound()
         {
-            roundUi.ResetAllUi();
-            
             roundClockManager.ActivateClock(true);
             
             playerManager.ResetData();

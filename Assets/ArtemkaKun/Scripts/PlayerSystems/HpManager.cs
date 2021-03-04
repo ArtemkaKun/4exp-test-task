@@ -14,13 +14,13 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         [SerializeField] private Vector2Int hpBounds;
 
         private Action _onPlayerLostAllHp;
-        private Action _onPlayerHit;
+        private Action<int> _onPlayerHit;
         private int _currentHp;
 
         /// <summary>
         /// Initialize default hp and Ui.
         /// </summary>
-        public void Initialize(Action playerLostAllHpDelegate, Action onPlayerHitDelegate)
+        public void Initialize(Action playerLostAllHpDelegate, Action<int> onPlayerHitDelegate)
         {
             _onPlayerLostAllHp = playerLostAllHpDelegate;
 
@@ -40,6 +40,8 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         private void SetHpEqualMaxBoundsValue()
         {
             _currentHp = hpBounds.y;
+            
+            _onPlayerHit?.Invoke(_currentHp);
         }
 
         /// <summary>
@@ -49,7 +51,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         {
             _currentHp -= 1;
 
-            _onPlayerHit?.Invoke();
+            _onPlayerHit?.Invoke(_currentHp);
             
             if (_currentHp == hpBounds.x)
             {
