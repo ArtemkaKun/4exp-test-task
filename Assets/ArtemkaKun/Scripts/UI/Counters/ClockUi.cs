@@ -1,5 +1,5 @@
 ﻿using System;
-using ArtemkaKun.Scripts.ClockSystem;
+using ArtemkaKun.Scripts.ClockSystems;
 using UnityEngine;
 
 namespace ArtemkaKun.Scripts.UI.Counters

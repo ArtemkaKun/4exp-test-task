@@ -1,5 +1,4 @@
-﻿using System;
-using ArtemkaKun.Scripts.UI.Counters;
+﻿using ArtemkaKun.Scripts.UI.Counters;
 using UnityEngine;
 
 namespace ArtemkaKun.Scripts.UI
@@ -9,12 +8,6 @@ namespace ArtemkaKun.Scripts.UI
     /// </summary>
     public sealed class RoundUi : MonoBehaviour
     {
-        public static event Action OnEnemyKilled;
-        
-        public Action<float> OnTimePassed { get; private set; }
-
-        public static event Action OnPlayerHit;
-        
         [SerializeField] private IntCounter killsCounter;
         [SerializeField] private ClockUi roundClockUi;
         [SerializeField] private HpBar hpBar;
@@ -22,18 +15,9 @@ namespace ArtemkaKun.Scripts.UI
         /// <summary>
         /// Initialize UI subscriptions and members. Should be used instead of Awake() method.
         /// </summary>
-        public void Initialize()
+        public void Initialize(Vector2Int hpBarBounds)
         {
-            SubscribeOnUiEvents();
-        }
-
-        private void SubscribeOnUiEvents()
-        {
-            OnEnemyKilled += AddOneKill;
-
-            OnTimePassed += AddTimeToRoundClock;
-
-            OnPlayerHit += RegisterPlayerDamage;
+            hpBar.Initialize(hpBarBounds);
         }
 
         private void AddOneKill()
@@ -41,12 +25,19 @@ namespace ArtemkaKun.Scripts.UI
             killsCounter.IncrementCounter();
         }
 
-        private void AddTimeToRoundClock(float passedTime)
+        /// <summary>
+        /// Adds passed time to the round clock.
+        /// </summary>
+        /// <param name="passedTime">How many seconds were passed.</param>
+        public void AddTimeToRoundClock(float passedTime)
         {
             roundClockUi.AddTimeToClock(passedTime);
         }
 
-        private void RegisterPlayerDamage()
+        /// <summary>
+        /// Changes value of the HP bar.
+        /// </summary>
+        public void RegisterPlayerDamage()
         {
             hpBar.DecreaseHp();
         }

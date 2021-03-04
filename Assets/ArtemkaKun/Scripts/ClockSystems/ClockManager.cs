@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ArtemkaKun.Scripts.ClockSystem
+namespace ArtemkaKun.Scripts.ClockSystems
 {
     /// <summary>
     /// Class, that maintains clock (like round clock).
