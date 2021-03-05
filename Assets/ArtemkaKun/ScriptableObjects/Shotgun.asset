@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1405d03dfca4bee892d1f37df335c46, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  range: 20
+  range: 40
   fireSound: {fileID: 8300000, guid: 747d7c58d143f7e48ae77a6aeb1abbda, type: 3}
