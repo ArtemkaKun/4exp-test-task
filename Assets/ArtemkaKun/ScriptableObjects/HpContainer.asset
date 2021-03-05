@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HpContainer
   m_EditorClassIdentifier: 
   speed: 0
-  enemyDiesSound: {fileID: 0}
+  enemyDiesSound: {fileID: 8300000, guid: 70d7826ddfe6f5c4a92d7100d4701ad0, type: 3}
   enemyAttackSound: {fileID: 0}
   enemyEffects:
   - {fileID: 1020763223854845577, guid: 430f0fbe6c71fdc45bd695cac199d93a, type: 3}
