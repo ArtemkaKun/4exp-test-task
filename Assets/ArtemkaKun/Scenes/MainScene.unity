@@ -1378,8 +1378,13 @@ MonoBehaviour:
   spawnFrequencyInSeconds: 5
   spawnRadius: 25
   yCoordinateBounds: {x: 3, y: 9}
-  enemyPrefab: {fileID: 600290284119941866, guid: 05debf15170205544a2792291950cd11,
-    type: 3}
+  enemySpawnRecords:
+  - enemyPrefab: {fileID: 600290284119941866, guid: 05debf15170205544a2792291950cd11,
+      type: 3}
+    spawnChance: 0.9
+  - enemyPrefab: {fileID: 3411884454227268998, guid: ad0e73cda94ed1c4db73aea8c748ad1b,
+      type: 3}
+    spawnChance: 0.1
 --- !u!1001 &572520908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8442,7 +8447,7 @@ BoxCollider:
   m_GameObject: {fileID: 1666629498}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
