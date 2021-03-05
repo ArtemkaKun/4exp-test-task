@@ -1375,7 +1375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e314a9708a03420cba8dcb56974f8b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnFrequencyInSeconds: 5
+  spawnFrequencyBounds: {x: 0.5, y: 5}
+  spawnFunctionSmoothCoefficient: 0.01
   spawnRadius: 25
   yCoordinateBounds: {x: 3, y: 9}
   enemySpawnRecords:
@@ -1385,6 +1386,7 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 2762811553479187012, guid: c6ae5e12fbed0b642a7d7038804acb85,
       type: 3}
     spawnChance: 0.15
+  _spawnRate: 0
 --- !u!1001 &572520908
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Linq;
 using ArtemkaKun.Scripts.Helpers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace ArtemkaKun.Scripts.EnemySystems
 {
@@ -10,12 +12,33 @@ namespace ArtemkaKun.Scripts.EnemySystems
     /// </summary>
     public sealed class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private float spawnFrequencyInSeconds;
+        [SerializeField] private Vector2 spawnFrequencyBounds;
+        [SerializeField] private float spawnFunctionSmoothCoefficient = 0.01f;
         [SerializeField] private float spawnRadius;
         [SerializeField] private Vector2 yCoordinateBounds;
         [SerializeField] private EnemySpawnRecord[] enemySpawnRecords;
 
         private bool _isSpawnerActive;
+        private float _spawnRate;
+
+        /// <summary>
+        /// Initialize manager's members.
+        /// </summary>
+        public void Initialize()
+        {
+            _spawnRate = spawnFrequencyBounds.y;
+        }
+
+        /// <summary>
+        /// Recalculates spawn frequency with modified cubic square formula.
+        /// </summary>
+        /// <param name="roundTimeInSeconds">Current duration of round in seconds.</param>
+        public void RecalculateSpawnRate(float roundTimeInSeconds)
+        {
+            var newSpawnFrequency = -Mathf.Pow(roundTimeInSeconds * spawnFunctionSmoothCoefficient, 1f / 3f) + spawnFrequencyBounds.y; //formula is -cbrt(currentRoundTime * smoothCoefficient) + maxAllowedSpawnTime
+
+            _spawnRate = Mathf.Clamp(newSpawnFrequency, spawnFrequencyBounds.x, spawnFrequencyBounds.y);
+        }
 
         /// <summary>
         ///     Activate spawner and start spawn enemies.
@@ -31,7 +54,7 @@ namespace ArtemkaKun.Scripts.EnemySystems
         {
             while (_isSpawnerActive)
             {
-                yield return new WaitForSeconds(spawnFrequencyInSeconds);
+                yield return new WaitForSeconds(_spawnRate);
 
                 var newEnemy = Instantiate(GetRandomEnemy());
                 

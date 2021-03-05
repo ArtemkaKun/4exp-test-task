@@ -49,6 +49,8 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void ReactOnTimeChangedEvent(TimeSpan newTimeValue)
         {
             roundUi.ChangeRoundClockValue(newTimeValue);
+            
+            enemySpawner.RecalculateSpawnRate((float)newTimeValue.TotalSeconds);
         }
 
         private void ReactOnPlayerHit(int newValue)
@@ -79,7 +81,7 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private int CalculateRoundScore()
         {
-            return playerManager.KillsCount * roundClockManager.ClockValue.Seconds;
+            return playerManager.KillsCount * Mathf.RoundToInt((float)roundClockManager.ClockValue.TotalSeconds);
         }
 
         private void InitializeSystems()
@@ -89,6 +91,8 @@ namespace ArtemkaKun.Scripts.GameSystems
             roundClockManager.Initialize(_onTimeChanged);
 
             playerManager.Initialize(_onPlayerLostAllHp, _onPlayerHpChanged, _onEnemyKilledCountChanged);
+            
+            enemySpawner.Initialize();
         }
 
         private void Start()
