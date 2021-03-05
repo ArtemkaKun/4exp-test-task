@@ -1381,10 +1381,10 @@ MonoBehaviour:
   enemySpawnRecords:
   - enemyPrefab: {fileID: 600290284119941866, guid: 05debf15170205544a2792291950cd11,
       type: 3}
-    spawnChance: 0.5
-  - enemyPrefab: {fileID: 3411884454227268998, guid: ad0e73cda94ed1c4db73aea8c748ad1b,
+    spawnChance: 0.85
+  - enemyPrefab: {fileID: 2762811553479187012, guid: c6ae5e12fbed0b642a7d7038804acb85,
       type: 3}
-    spawnChance: 0.5
+    spawnChance: 0.15
 --- !u!1001 &572520908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9628,7 +9628,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
