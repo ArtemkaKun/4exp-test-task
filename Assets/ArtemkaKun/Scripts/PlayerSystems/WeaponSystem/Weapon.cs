@@ -38,7 +38,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
 
         private void KillEnemy(GameObject enemy)
         {
-            enemy.GetComponent<Enemy>().PlayDieSound();
+            enemy.GetComponent<Enemy>().OnDie();
             
             Destroy(enemy);
 

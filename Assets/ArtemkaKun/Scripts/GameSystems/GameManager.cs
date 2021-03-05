@@ -13,6 +13,8 @@ namespace ArtemkaKun.Scripts.GameSystems
     /// </summary>
     public sealed class GameManager : MonoBehaviour
     {
+        public static Action onAddPlayerEffectFired;
+        
         [SerializeField] private RoundUi roundUi;
         [SerializeField] private ClockManager roundClockManager;
         [SerializeField] private Player playerManager;
@@ -39,6 +41,8 @@ namespace ArtemkaKun.Scripts.GameSystems
 
             _onEnemyKilledCountChanged += ReactOnEnemyKilledCountChangedEvent;
 
+            onAddPlayerEffectFired += IncrementPlayersHp;
+            
             _onPlayerLostAllHp += StopRound;
         }
 
@@ -55,6 +59,11 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void ReactOnEnemyKilledCountChangedEvent(int newKillsValue)
         {
             roundUi.ChangeKilledEnemiesCount(newKillsValue);
+        }
+
+        private void IncrementPlayersHp()
+        {
+            playerManager.IncrementHp();
         }
 
         private void StopRound()

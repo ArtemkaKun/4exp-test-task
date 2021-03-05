@@ -1,4 +1,5 @@
 ﻿using System;
+using ArtemkaKun.Scripts.EnemySystems.EnemyEffects;
 using UnityEngine;
 
 namespace ArtemkaKun.Scripts.EnemySystems
@@ -16,11 +17,36 @@ namespace ArtemkaKun.Scripts.EnemySystems
         }
 
         /// <summary>
-        /// Play monster die sound.
+        /// This function should be called only when enemy dies.
         /// </summary>
-        public void PlayDieSound()
+        public void OnDie()
         {
+            PlayDieSound();
+
+            ActivateEnemyEffects(EnemyEffectActivationTime.OnKilled);
+        }
+
+        private void PlayDieSound()
+        {
+            if (!data.EnemyDiesSound)
+            {
+                return;
+            }
+            
             AudioSource.PlayClipAtPoint(data.EnemyDiesSound, transform.position);
+        }
+
+        private void ActivateEnemyEffects(EnemyEffectActivationTime activationTime)
+        {
+            foreach (var enemyEffect in data.EnemyEffects)
+            {
+                if (enemyEffect.ActivationTime != activationTime)
+                {
+                    continue;
+                }
+
+                enemyEffect.ActivateEffect();
+            }
         }
 
         /// <summary>
@@ -28,6 +54,11 @@ namespace ArtemkaKun.Scripts.EnemySystems
         /// </summary>
         public void PlayAttackSound()
         {
+            if (!data.EnemyAttackSound)
+            {
+                return;
+            }
+            
             AudioSource.PlayClipAtPoint(data.EnemyAttackSound, transform.position);
         }
     }

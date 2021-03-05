@@ -60,5 +60,20 @@ namespace ArtemkaKun.Scripts.PlayerSystems
                 _onPlayerLostAllHp?.Invoke();
             }
         }
+
+        /// <summary>
+        ///     Increment HP's count on 1.
+        /// </summary>
+        public void IncrementHp()
+        {
+            if (_currentHp == hpBounds.y)
+            {
+                return;
+            }
+
+            _currentHp += 1;
+            
+            _onPlayerHpChanged?.Invoke(_currentHp);
+        }
     }
 }

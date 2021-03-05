@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ArtemkaKun.Scripts.EnemySystems.EnemyEffects;
+using UnityEngine;
 
 namespace ArtemkaKun.Scripts.EnemySystems
 {
@@ -11,11 +12,14 @@ namespace ArtemkaKun.Scripts.EnemySystems
         [SerializeField] private float speed;
         [SerializeField] private AudioClip enemyDiesSound;
         [SerializeField] private AudioClip enemyAttackSound;
+        [SerializeField] private EnemyEffect[] enemyEffects;
 
         public float Speed => speed;
 
         public AudioClip EnemyDiesSound => enemyDiesSound;
 
         public AudioClip EnemyAttackSound => enemyAttackSound;
+
+        public EnemyEffect[] EnemyEffects => enemyEffects;
     }
 }

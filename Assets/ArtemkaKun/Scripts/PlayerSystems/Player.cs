@@ -59,5 +59,13 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         {
             hpManager.DecrementHp();
         }
+
+        /// <summary>
+        ///     Increment HP's count on 1.
+        /// </summary>
+        public void IncrementHp()
+        {
+            hpManager.IncrementHp();
+        }
     }
 }
