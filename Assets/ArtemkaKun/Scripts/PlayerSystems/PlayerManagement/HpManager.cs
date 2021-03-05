@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ArtemkaKun.Scripts.PlayerSystems
+namespace ArtemkaKun.Scripts.PlayerSystems.PlayerManagement
 {
     /// <summary>
     ///     Class, that stores and manages player's hp.
@@ -10,8 +10,9 @@ namespace ArtemkaKun.Scripts.PlayerSystems
     public sealed class HpManager
     {
         [SerializeField] private Vector2Int hpBounds;
-        
+
         private int _currentHp;
+        
         private Action<int> _onPlayerHpChanged;
         private Action _onPlayerLostAllHp;
 
@@ -72,7 +73,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems
             }
 
             _currentHp += 1;
-            
+
             _onPlayerHpChanged?.Invoke(_currentHp);
         }
     }

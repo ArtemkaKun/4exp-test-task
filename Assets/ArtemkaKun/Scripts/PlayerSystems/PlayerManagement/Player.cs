@@ -3,7 +3,7 @@ using ArtemkaKun.Scripts.EnemySystems;
 using ArtemkaKun.Scripts.PlayerSystems.WeaponSystem;
 using UnityEngine;
 
-namespace ArtemkaKun.Scripts.PlayerSystems
+namespace ArtemkaKun.Scripts.PlayerSystems.PlayerManagement
 {
     /// <summary>
     ///     Class, that stores and manages player's data.
@@ -18,15 +18,6 @@ namespace ArtemkaKun.Scripts.PlayerSystems
         public Vector2Int HpBounds => hpManager.HpBounds;
 
         public int KillsCount => _enemyKillsManager.KillsCount;
-
-        private void OnTriggerEnter(Collider enemy)
-        {
-            enemy.gameObject.GetComponent<Enemy>().PlayAttackSound();
-            
-            DecrementHp();
-
-            Destroy(enemy.gameObject);
-        }
 
         /// <summary>
         ///     Initialize player's data and UI connections.
@@ -55,17 +46,26 @@ namespace ArtemkaKun.Scripts.PlayerSystems
             _enemyKillsManager.Reset();
         }
 
-        private void DecrementHp()
-        {
-            hpManager.DecrementHp();
-        }
-
         /// <summary>
         ///     Increment HP's count on 1.
         /// </summary>
         public void IncrementHp()
         {
             hpManager.IncrementHp();
+        }
+
+        private void OnTriggerEnter(Collider enemy)
+        {
+            enemy.gameObject.GetComponent<Enemy>().PlayAttackSound();
+
+            DecrementHp();
+
+            Destroy(enemy.gameObject);
+        }
+
+        private void DecrementHp()
+        {
+            hpManager.DecrementHp();
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using ArtemkaKun.Scripts.EnemySystems.EnemyEffects;
+﻿using ArtemkaKun.Scripts.EnemySystems.EnemyEffects;
 using UnityEngine;
 
 namespace ArtemkaKun.Scripts.EnemySystems
@@ -32,7 +31,7 @@ namespace ArtemkaKun.Scripts.EnemySystems
             {
                 return;
             }
-            
+
             AudioSource.PlayClipAtPoint(data.EnemyDiesSound, transform.position);
         }
 
@@ -58,7 +57,7 @@ namespace ArtemkaKun.Scripts.EnemySystems
             {
                 return;
             }
-            
+
             AudioSource.PlayClipAtPoint(data.EnemyAttackSound, transform.position);
         }
     }

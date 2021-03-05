@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using ArtemkaKun.Scripts.Helpers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace ArtemkaKun.Scripts.EnemySystems
+namespace ArtemkaKun.Scripts.EnemySystems.SpawnSystem
 {
     /// <summary>
     ///     Class, that controls enemy spawner.
@@ -30,17 +29,6 @@ namespace ArtemkaKun.Scripts.EnemySystems
         }
 
         /// <summary>
-        /// Recalculates spawn frequency with modified cubic square formula.
-        /// </summary>
-        /// <param name="roundTimeInSeconds">Current duration of round in seconds.</param>
-        public void RecalculateSpawnRate(float roundTimeInSeconds)
-        {
-            var newSpawnFrequency = -Mathf.Pow(roundTimeInSeconds * spawnFunctionSmoothCoefficient, 1f / 3f) + spawnFrequencyBounds.y; //formula is -cbrt(currentRoundTime * smoothCoefficient) + maxAllowedSpawnTime
-
-            _spawnRate = Mathf.Clamp(newSpawnFrequency, spawnFrequencyBounds.x, spawnFrequencyBounds.y);
-        }
-
-        /// <summary>
         ///     Activate spawner and start spawn enemies.
         /// </summary>
         public void StartSpawner()
@@ -57,7 +45,7 @@ namespace ArtemkaKun.Scripts.EnemySystems
                 yield return new WaitForSeconds(_spawnRate);
 
                 var newEnemy = Instantiate(GetRandomEnemy());
-                
+
                 newEnemy.transform.position = ConvertPointTo3dSpace(GetRandomPointOnCircleEdge());
 
                 newEnemy.transform.LookAt(Vector3.zero);
@@ -75,10 +63,10 @@ namespace ArtemkaKun.Scripts.EnemySystems
             {
                 return enemySpawnRecords.GetRandomElement().enemyPrefab;
             }
-            
+
             return matchedToSpawnEnemies.GetRandomElement().enemyPrefab;
         }
-        
+
         private Vector2 GetRandomPointOnCircleEdge()
         {
             var randomDirection = Random.insideUnitCircle.normalized;
@@ -88,7 +76,8 @@ namespace ArtemkaKun.Scripts.EnemySystems
 
         private Vector3 ConvertPointTo3dSpace(Vector2 randomPointOnSphere)
         {
-            return new Vector3(randomPointOnSphere.x, Random.Range(yCoordinateBounds.x, yCoordinateBounds.y), randomPointOnSphere.y);
+            return new Vector3(randomPointOnSphere.x, Random.Range(yCoordinateBounds.x, yCoordinateBounds.y),
+                randomPointOnSphere.y);
         }
 
         /// <summary>
@@ -97,6 +86,19 @@ namespace ArtemkaKun.Scripts.EnemySystems
         public void StopSpawner()
         {
             _isSpawnerActive = false;
+        }
+
+        /// <summary>
+        /// Recalculates spawn frequency with modified cubic square formula.
+        /// </summary>
+        /// <param name="roundTimeInSeconds">Current duration of round in seconds.</param>
+        public void RecalculateSpawnRate(float roundTimeInSeconds)
+        {
+            var newSpawnFrequency = -Mathf.Pow(roundTimeInSeconds * spawnFunctionSmoothCoefficient, 1f / 3f) +
+                                    spawnFrequencyBounds
+                                        .y; //formula is -cbrt(currentRoundTime * smoothCoefficient) + maxAllowedSpawnTime
+
+            _spawnRate = Mathf.Clamp(newSpawnFrequency, spawnFrequencyBounds.x, spawnFrequencyBounds.y);
         }
     }
 }

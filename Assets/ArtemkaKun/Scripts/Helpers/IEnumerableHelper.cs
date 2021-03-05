@@ -13,13 +13,13 @@ namespace ArtemkaKun.Scripts.Helpers
         public static T GetRandomElement<T>(this IEnumerable<T> data)
         {
             var countOfElements = data.Count();
-            
+
             if (countOfElements == 0)
             {
                 throw new Exception("Cannot take a random element from empty list");
             }
 
-            return data.ElementAt(Random.Range(0, countOfElements)); 
+            return data.ElementAt(Random.Range(0, countOfElements));
         }
     }
 }

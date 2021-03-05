@@ -13,7 +13,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
         [SerializeField] private WeaponData data;
         [SerializeField] private Camera playerCamera;
         [SerializeField] private AudioSource weaponAudioSource;
-        
+
         public event Action OnEnemyWasKilled;
 
         private void Awake()
@@ -39,7 +39,7 @@ namespace ArtemkaKun.Scripts.PlayerSystems.WeaponSystem
         private void KillEnemy(GameObject enemy)
         {
             enemy.GetComponent<Enemy>().OnDie();
-            
+
             Destroy(enemy);
 
             OnEnemyWasKilled?.Invoke();

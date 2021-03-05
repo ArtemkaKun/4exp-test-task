@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ArtemkaKun.Scripts.ClockSystems
+namespace ArtemkaKun.Scripts.ClockSystem
 {
     /// <summary>
     ///     Class, that maintains clock (like round clock).
@@ -17,7 +17,10 @@ namespace ArtemkaKun.Scripts.ClockSystems
 
         private void Update()
         {
-            if (!_isClockActive) return;
+            if (!_isClockActive)
+            {
+                return;
+            }
 
             _clockValue = _clockValue.Add(TimeSpan.FromSeconds(Time.deltaTime));
 

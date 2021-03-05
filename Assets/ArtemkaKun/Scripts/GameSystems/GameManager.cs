@@ -1,7 +1,8 @@
 ﻿using System;
-using ArtemkaKun.Scripts.ClockSystems;
-using ArtemkaKun.Scripts.EnemySystems;
+using ArtemkaKun.Scripts.ClockSystem;
+using ArtemkaKun.Scripts.EnemySystems.SpawnSystem;
 using ArtemkaKun.Scripts.PlayerSystems;
+using ArtemkaKun.Scripts.PlayerSystems.PlayerManagement;
 using ArtemkaKun.Scripts.UI;
 using UnityEngine;
 
@@ -14,12 +15,12 @@ namespace ArtemkaKun.Scripts.GameSystems
     public sealed class GameManager : MonoBehaviour
     {
         public static Action onAddPlayerEffectFired;
-        
+
         [SerializeField] private RoundUi roundUi;
         [SerializeField] private ClockManager roundClockManager;
         [SerializeField] private Player playerManager;
         [SerializeField] private EnemySpawner enemySpawner;
-        
+
         private Action<int> _onEnemyKilledCountChanged;
         private Action<int> _onPlayerHpChanged;
         private Action _onPlayerLostAllHp;
@@ -42,15 +43,15 @@ namespace ArtemkaKun.Scripts.GameSystems
             _onEnemyKilledCountChanged += ReactOnEnemyKilledCountChangedEvent;
 
             onAddPlayerEffectFired += IncrementPlayersHp;
-            
+
             _onPlayerLostAllHp += StopRound;
         }
 
         private void ReactOnTimeChangedEvent(TimeSpan newTimeValue)
         {
             roundUi.ChangeRoundClockValue(newTimeValue);
-            
-            enemySpawner.RecalculateSpawnRate((float)newTimeValue.TotalSeconds);
+
+            enemySpawner.RecalculateSpawnRate((float) newTimeValue.TotalSeconds);
         }
 
         private void ReactOnPlayerHit(int newValue)
@@ -71,7 +72,7 @@ namespace ArtemkaKun.Scripts.GameSystems
         private void StopRound()
         {
             enemySpawner.StopSpawner();
-            
+
             StopAllCoroutines();
 
             roundUi.SetRoundScore(CalculateRoundScore());
@@ -81,7 +82,7 @@ namespace ArtemkaKun.Scripts.GameSystems
 
         private int CalculateRoundScore()
         {
-            return playerManager.KillsCount * Mathf.RoundToInt((float)roundClockManager.ClockValue.TotalSeconds);
+            return playerManager.KillsCount * Mathf.RoundToInt((float) roundClockManager.ClockValue.TotalSeconds);
         }
 
         private void InitializeSystems()
@@ -91,7 +92,7 @@ namespace ArtemkaKun.Scripts.GameSystems
             roundClockManager.Initialize(_onTimeChanged);
 
             playerManager.Initialize(_onPlayerLostAllHp, _onPlayerHpChanged, _onEnemyKilledCountChanged);
-            
+
             enemySpawner.Initialize();
         }
 

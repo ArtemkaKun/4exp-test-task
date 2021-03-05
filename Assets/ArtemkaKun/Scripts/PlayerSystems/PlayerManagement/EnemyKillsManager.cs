@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArtemkaKun.Scripts.PlayerSystems
+namespace ArtemkaKun.Scripts.PlayerSystems.PlayerManagement
 {
     /// <summary>
     ///     Class, that store and manages player's kills.
